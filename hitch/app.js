@@ -8,6 +8,8 @@ var multer = require('multer');
 
 var routes = require('./routes/index');
 var proposal = require('./routes/proposal');
+var watson = require('./routes/watson');
+var checkout = require('./routes/checkout');
 
 var app = express();
 
@@ -27,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/proposal', proposal);
+app.use('/watson', watson);
+app.use('/checkout', checkout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

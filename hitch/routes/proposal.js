@@ -19,6 +19,17 @@ var document_conversion = watson.document_conversion({
   version_date: '2015-12-15'
 });
 
+var config = {
+  word: {
+    heading: {
+      fonts: [
+        { level: 1, min_size: 24 },
+        { level: 2, min_size: 16, max_size: 24 }
+      ]
+    }
+  }
+};
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,19 +39,19 @@ router.get('/', function(req, res, next) {
 
 router.post('/', multer({dest: __dirname + '/public/uploads'}).single('upl'), function(req, res, next) {
 	document_conversion.convert({
-  file: fs.createReadStream(__dirname + '/public/uploads/7aadd7e894e224790f0383a647ee3f3f'),
-  conversion_target: 'ANSWER_UNITS'
+  file: fs.createReadStream(__dirname + '/public/uploads/27fc1bf7ed1fdaee67bb9c0f8aa2be10'),
+  conversion_target: 'ANSWER_UNITS',
   // Use a custom configuration.
+  config: config
 	}, function (err, response) {
 	  if (err) {
 	    console.error(err);
 	  } else {
-	    console.log(JSON.stringify(response, null, 2));
+	    // console.log(JSON.stringify(response, null, 2));
+	    res.json(response);
 	  }
 	});
 	// console.log(req.file)
 })
-
-
 
 module.exports = router;
